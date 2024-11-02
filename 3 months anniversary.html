@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Months Anniversary</title>
+    <style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f9f3e9;
+            color: #333;
+        }
+        h1 { margin: 20px 0; }
+
+        #countdown {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .gallery img {
+            width: 150px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-content {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 5px;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #messageWall {
+            width: 80%;
+            max-width: 500px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        #messageWall p {
+            background-color: #ffe0e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Happy 3 Months Anniversary!</h1>
+    <div id="countdown"></div>
+
+    <div class="gallery">
+        <img src="photo1.jpg" alt="Memory 1" onclick="openLightbox(this)">
+        <img src="photo2.jpg" alt="Memory 2" onclick="openLightbox(this)">
+        <img src="photo3.jpg" alt="Memory 3" onclick="openLightbox(this)">
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightboxImg" class="lightbox-content">
+    </div>
+
+    <div id="messageWall">
+        <h3>Untuk Sayangku</h3>
+        <p>Happy 3 Months Anniversary, Sayang!<br>
+            There are so many things happened to us as a couple in these last 3 months.
+            Terima kasih ya sudah mau bertahan dan memerjuangkan hubungan kita sampai 3 bulan ini, hopefully it will lasts for a very long time.
+            Until the very last star burns into oblivion and time stand still to witness us. 
+        </p> 
+    </div>
+
+    <script>
+        const countdown = document.getElementById('countdown');
+        const anniversaryDateUTC = new Date('2024-08-04T00:00:00Z');
+
+        function updateCountdown() {
+            const nowUTC = new Date();
+            const nowWIB = new Date(nowUTC.getTime() + (7 * 60 * 60 * 1000));
+            const timeTogether = nowWIB - anniversaryDateUTC;
+
+            const days = Math.floor(timeTogether / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeTogether % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeTogether % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeTogether % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `Together for: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        setInterval(updateCountdown, 1000);
+
+        function openLightbox(img) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
